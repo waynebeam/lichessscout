@@ -1,30 +1,11 @@
-import { Cagliostro } from "next/font/google";
-import { json } from "stream/consumers";
+import Link from "next/link";
+import GamesList from "./GamesList";
 
-interface Game {
-    winner: 'white' | 'black' | undefined;
-    moves: string;
-    players: {
-        white: {
-            user: {
-                name: string;
-            }
-            rating: number;
-        }
-        black: {
-            user: {
-                name: string;
-            }
-            rating: number;
-        }
-    }
-}
 
 async function LoadGames(username: string) {
-    let games: Game[] = [];
     const baseUrl = `https://lichess.org/api/games/user/${username}?`;
     const params: any = {
-        max: 20,
+        max: 50,
         rated: true,
         pgnInJson: true,
         perfType: 'blitz,rapid,classical'
@@ -35,32 +16,26 @@ async function LoadGames(username: string) {
         headers: { Accept: 'application/x-ndjson' }
     });
     if (!response.ok) {
-        return null;
+        return [];
     }
 
     const data = await response.text();
     let gameStrings = data.split('\n').filter(line => line);
-    gameStrings.forEach(gameString => {
-        const game = JSON.parse(gameString);
-        games.push(game);
-    })
+    return gameStrings;
 
-    return games;
 
 }
 
 export default async function Page({ params }: { params: { username: string } }) {
-    let games = await LoadGames(params.username);
+    let gameStrings = await LoadGames(params.username);
 
     return (
         <div>
             {
-                games ?
-                    games.map(game => {
-                        return <p>{game.players.white.user.name} vs. {game.players.black.user.name}</p>
-                    })
+                gameStrings.length ?
+                    <GamesList gameStrings={gameStrings} username={params.username} />
                     :
-                    null
+                    <Link href={'/'}>No games found! Go back?</Link>
             }
         </div>
     )
