@@ -7,6 +7,10 @@ interface GamesListParams {
     username: string
 }
 
+interface OpeningCount {
+    [index: string]: number;
+}
+
 export interface Game {
     winner: 'white' | 'black' | undefined;
     moves: string;
@@ -31,6 +35,18 @@ export interface Game {
     }
 }
 
+function countOpenings(games: Game[]) {
+
+    let openingCount: OpeningCount = {};
+    games.forEach(game => {
+        const opening = game.opening.name.split(':')[0];
+        openingCount[opening] ? openingCount[opening] = openingCount[opening] + 1 : openingCount[opening] = 1;
+    })
+
+    console.log(openingCount);
+
+}
+
 export default function GamesList({ gameStrings, username }: GamesListParams) {
     const games: Game[] = gameStrings.map(gameString => JSON.parse(gameString));
     let whiteWins = 0;
@@ -51,6 +67,11 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
             return;
         }
     })
+
+    const whiteOpenings = countOpenings(games.filter(game => game.players.white.user.name.toLowerCase() === username.toLowerCase()));
+    const blackOpenings = countOpenings(games.filter(game => game.players.black.user.name.toLowerCase() === username.toLowerCase()));
+
+
 
     return (
         <div>
