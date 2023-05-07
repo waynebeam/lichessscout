@@ -1,21 +1,28 @@
 'use client';
 
 
-import { useState } from "react";
+import React, { useState } from "react";
 import UsernameEntry from "./usernameentry";
 import ScoutingReport from "./scoutingreport";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
 
   const [username, setUsername] = useState('');
+  const router = useRouter();
 
+  function scoutUser(ev: React.FormEvent) {
+    ev.preventDefault();
+    router.push(`/report/${username}`);
+  }
 
   return <main>
 
-    <label htmlFor="username">Enter Lichess Username: </label>
-    <input id="username" type="text" defaultValue={username} onChange={e => setUsername(e.target.value)} />
-    <Link href={`/report/${username}/`}>Scout!</Link>
-
+    <form onSubmit={scoutUser}>
+      <label htmlFor="username">Enter Lichess Username: </label>
+      <input id="username" type="text" defaultValue={username} onChange={e => setUsername(e.target.value)} />
+      <input type="submit" value='Scout!'></input>
+    </form>
   </main>
 }

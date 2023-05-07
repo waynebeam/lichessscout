@@ -1,3 +1,5 @@
+'use client';
+
 import GameView from "../GameView"
 
 interface GamesListParams {
@@ -60,7 +62,7 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
                 <h1>{draws} Draws</h1>
             </div>
             {
-                games.map(game => <GameView game={game} />)
+                games.map(game => <GameView game={game} key={game.id} />)
             }
         </div>
     )
