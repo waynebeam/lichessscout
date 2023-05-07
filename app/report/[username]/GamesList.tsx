@@ -7,9 +7,14 @@ interface GamesListParams {
     username: string
 }
 
-interface OpeningCount {
+interface OpeningTotals {
     [index: string]: number;
 }
+interface OpeningCount {
+    name: string;
+    count: number;
+}
+
 
 export interface Game {
     winner: 'white' | 'black' | undefined;
@@ -36,14 +41,24 @@ export interface Game {
 }
 
 function countOpenings(games: Game[]) {
-
-    let openingCount: OpeningCount = {};
+    let numOpeningsToReturn = 5;
+    let openingTotals: OpeningTotals = {};
     games.forEach(game => {
         const opening = game.opening.name.split(':')[0];
-        openingCount[opening] ? openingCount[opening] = openingCount[opening] + 1 : openingCount[opening] = 1;
+        openingTotals[opening] ? openingTotals[opening] = openingTotals[opening] + 1 : openingTotals[opening] = 1;
     })
 
-    console.log(openingCount);
+    let openingArray: OpeningCount[] = [];
+    for (const opening in openingTotals) {
+        openingArray.push({ name: opening, count: openingTotals[opening] });
+    }
+    openingArray.sort((a, b) => {
+        if (a.count < b.count) return 1;
+        if (a.count > b.count) return -1;
+        return 0;
+    })
+    openingArray = openingArray.slice(0, Math.min(openingArray.length, numOpeningsToReturn));
+    return openingArray;
 
 }
 
@@ -77,11 +92,25 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
         <div>
             <div>
                 <h1>{username} Scouting Report</h1>
-                <h1>{gameStrings.length} rated games</h1>
+                <h1>{gameStrings.length} rated games scouted</h1>
                 <h1>{whiteWins + blackWins} wins</h1>
                 <h1>{totalGames - (whiteWins + blackWins + draws)} Losses</h1>
                 <h1>{draws} Draws</h1>
+                <h1>Top White Openings:</h1>
+                {
+                    whiteOpenings.map(opening => {
+                        return <p key={opening.name}>{opening.name}: {opening.count}</p>
+                    })
+                }
+                <h1>Top Black Openings:</h1>
+                {
+                    blackOpenings.map(opening => {
+                        return <p key={opening.name}>{opening.name}: {opening.count}</p>
+                    })
+                }
+
             </div>
+            <br />
             {
                 games.map(game => <GameView game={game} key={game.id} />)
             }
