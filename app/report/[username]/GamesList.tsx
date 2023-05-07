@@ -22,7 +22,11 @@ export interface Game {
             rating: number;
         }
     }
-    id: string
+    id: string;
+    opening: {
+        eco: string;
+        name: string;
+    }
 }
 
 export default function GamesList({ gameStrings, username }: GamesListParams) {

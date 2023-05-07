@@ -8,7 +8,8 @@ async function LoadGames(username: string) {
         max: 50,
         rated: true,
         pgnInJson: true,
-        perfType: 'blitz,rapid,classical'
+        perfType: 'blitz,rapid,classical',
+        opening: true
     }
     const url = baseUrl + new URLSearchParams(params);
     const response = await fetch(url, {
