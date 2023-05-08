@@ -20,3 +20,12 @@ p {
   margin-block-start: 5px;
   margin-block-end: 5px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}

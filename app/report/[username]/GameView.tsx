@@ -23,15 +23,22 @@ export default function GameView({ game, username }: GameViewParams) {
     return (
         <div className={style}>
             <p className={styles.gameInfo}>
-                <Link className={styles.link} href={`/report/${whitePlayer}`}>{whiteTitle}{whitePlayer} ({game.players.white.rating}) </Link>
-                vs. <Link className={styles.link} href={`/report/${blackPlayer}`}>{blackTitle}{blackPlayer} ({game.players.black.rating})</Link>
-                {!game.winner ? " 1/2-1/2" : game.winner === "white" ? " 1-0" : " 0-1"}</p>
+                {playedWhite ? <a target="_blank" className={styles.link} href={`https://lichess.org/@/${username}`}>{whiteTitle}{whitePlayer} ({game.players.white.rating}) </a>
+                    :
+                    <Link className={styles.link} href={`/report/${whitePlayer}`}>{whiteTitle}{whitePlayer} ({game.players.white.rating}) </Link>
+                }                vs.
+                {!playedWhite ? <a target="_blank" className={styles.link} href={`https://lichess.org/@/${username}`}>{blackTitle}{blackPlayer} ({game.players.black.rating})</a>
+                    :
+
+                    <Link className={styles.link} href={`/report/${blackPlayer}`}>{blackTitle}{blackPlayer} ({game.players.black.rating})</Link>
+                }                {!game.winner ? " 1/2-1/2" : game.winner === "white" ? " 1-0" : " 0-1"}</p>
             <div onClick={() => setOpeningMovesVisible(!openingMovesVisible)}>
                 <p className={styles.openingInfo}>{game.opening ? game.opening.name : game.id}</p>
                 {
                     openingMovesVisible ? game.moves.split(' ', 10).join(' ') : null
                 }
             </div>
+            <p>({game.perf})</p>
             <div className={styles.pgnToggle} onClick={() => setPgnVisible(!pgnVisible)}>
                 {pgnVisible ? <p>PGN <br />  {game.pgn}</p> : <p>View PGN</p>}
             </div>

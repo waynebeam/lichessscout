@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import GameView from "./GameView"
 import styles from './gameView.module.css'
 
@@ -42,12 +43,13 @@ export interface Game {
         eco: string;
         name: string;
     }
+    perf: string;
 }
 
 function buildGamesArray(gameStrings: string[]) {
     const numGamesToScout = 50;
     let games: Game[] = gameStrings.map(gameString => JSON.parse(gameString));
-    games = games.filter(game => game.moves);
+    games = games.filter(game => game.moves && game.opening);
     games = games.slice(0, Math.min(numGamesToScout, games.length));
     return games;
 }
@@ -107,7 +109,7 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
     return (
         <div>
             <div className={styles.scoutingReportContainer}>
-                <h1 className={styles.scoutingTitle}>{title ? title + " " : ''}{username} Scouting Report ({games.length} rated games)</h1>
+                <h1 className={styles.scoutingTitle}><a target="_blank" href={`https://lichess.org/@/${username}`}>{title ? title + " " : ''}{username}</a> Scouting Report ({games.length} rated games)</h1>
                 <div className={styles.commonOpeningContainer + ' ' + styles.commonOpeningContainerWhite}>
                     <h1>Common White Openings:</h1>
                     <div className={styles.commonOpeningList}>
