@@ -1,6 +1,6 @@
 'use client';
 
-import GameView from "../GameView"
+import GameView from "./GameView"
 
 interface GamesListParams {
     gameStrings: string[]
@@ -23,12 +23,14 @@ export interface Game {
         white: {
             user: {
                 name: string;
+                title?: string;
             }
             rating: number;
         }
         black: {
             user: {
                 name: string;
+                title?: string;
             }
             rating: number;
         }
@@ -40,12 +42,23 @@ export interface Game {
     }
 }
 
+function buildGamesArray(gameStrings: string[]) {
+    const numGamesToScout = 50;
+    let games: Game[] = gameStrings.map(gameString => JSON.parse(gameString));
+    games = games.filter(game => game.moves);
+    games = games.slice(0, Math.min(numGamesToScout, games.length));
+    return games;
+}
+
 function countOpenings(games: Game[]) {
     let numOpeningsToReturn = 5;
     let openingTotals: OpeningTotals = {};
     games.forEach(game => {
-        const opening = game.opening.name.split(':')[0];
-        openingTotals[opening] ? openingTotals[opening] = openingTotals[opening] + 1 : openingTotals[opening] = 1;
+        if (game.opening) {
+            const opening = game.opening.name.split(':')[0];
+            openingTotals[opening] ? openingTotals[opening] = openingTotals[opening] + 1 : openingTotals[opening] = 1;
+        }
+
     })
 
     let openingArray: OpeningCount[] = [];
@@ -63,7 +76,7 @@ function countOpenings(games: Game[]) {
 }
 
 export default function GamesList({ gameStrings, username }: GamesListParams) {
-    const games: Game[] = gameStrings.map(gameString => JSON.parse(gameString));
+    const games = buildGamesArray(gameStrings);
     let whiteWins = 0;
     let blackWins = 0;
     let draws = 0;
@@ -85,14 +98,15 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
 
     const whiteOpenings = countOpenings(games.filter(game => game.players.white.user.name.toLowerCase() === username.toLowerCase()));
     const blackOpenings = countOpenings(games.filter(game => game.players.black.user.name.toLowerCase() === username.toLowerCase()));
-
+    const title = games[0].players.white.user.name.toLowerCase() === username.toLowerCase() ? games[0].players.white.user.title :
+        games[0].players.black.user.name.toLowerCase() === username.toLowerCase() ? games[0].players.black.user.title : '';
 
 
     return (
         <div>
             <div>
-                <h1>{username} Scouting Report</h1>
-                <h1>{gameStrings.length} rated games scouted</h1>
+                <h1>{title ? title + " " : ''}{username} Scouting Report</h1>
+                <h1>{games.length} rated games scouted</h1>
                 <h1>{whiteWins + blackWins} wins</h1>
                 <h1>{totalGames - (whiteWins + blackWins + draws)} Losses</h1>
                 <h1>{draws} Draws</h1>

@@ -5,11 +5,11 @@ import GamesList from "./GamesList";
 async function LoadGames(username: string) {
     const baseUrl = `https://lichess.org/api/games/user/${username}?`;
     const params: any = {
-        max: 50,
+        max: 60,
         rated: true,
         pgnInJson: true,
         perfType: 'blitz,rapid,classical',
-        opening: true
+        opening: true,
     }
     const url = baseUrl + new URLSearchParams(params);
     const response = await fetch(url, {

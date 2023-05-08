@@ -2,8 +2,6 @@
 
 
 import React, { useState } from "react";
-import UsernameEntry from "./usernameentry";
-import ScoutingReport from "./scoutingreport";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
