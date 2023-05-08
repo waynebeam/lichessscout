@@ -19,6 +19,7 @@ interface OpeningCount {
 export interface Game {
     winner: 'white' | 'black' | undefined;
     moves: string;
+    pgn: string;
     players: {
         white: {
             user: {
