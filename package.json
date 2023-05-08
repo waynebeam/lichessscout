@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "eslint-config-next": "^13.4.1",
-    "typescript": "^5.1.0-beta"
+    "typescript": "^5.0"
   }
 }
