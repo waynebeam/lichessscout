@@ -7,17 +7,21 @@ import Link from "next/link";
 
 interface GameViewParams {
     game: Game
+    username: string
 }
 
-export default function GameView({ game }: GameViewParams) {
+export default function GameView({ game, username }: GameViewParams) {
     const [pgnVisible, setPgnVisible] = useState(false);
     const [openingMovesVisible, setOpeningMovesVisible] = useState(false);
     const whiteTitle = game.players.white.user.title ? game.players.white.user.title + ' ' : '';
     const blackTitle = game.players.black.user.title ? game.players.black.user.title + ' ' : '';
     const whitePlayer = game.players.white.user.name;
     const blackPlayer = game.players.black.user.name;
+    const playedWhite = whitePlayer.toLowerCase() === username.toLowerCase();
+    const style = [styles.game, playedWhite ? styles.gameBlack : null].join(' ');
+
     return (
-        <div className={styles.game}>
+        <div className={style}>
             <p className={styles.gameInfo}>
                 <Link className={styles.link} href={`/report/${whitePlayer}`}>{whiteTitle}{whitePlayer} ({game.players.white.rating}) </Link>
                 vs. <Link className={styles.link} href={`/report/${blackPlayer}`}>{blackTitle}{blackPlayer} ({game.players.black.rating})</Link>

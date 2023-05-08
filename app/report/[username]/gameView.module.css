@@ -2,6 +2,14 @@
     border: 3px solid white;
     border-radius: 10px;
     text-align: center;
+    width: 600px;
+    padding: 10px;
+}
+
+.gameBlack {
+    background-color: white;
+    color: black;
+    border-color: darkgray;
 }
 
 .pgnToggle {
@@ -25,4 +33,44 @@
     color: inherit;
 }
 
-.gamesContainer {}
+.gamesContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.scoutingReportContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.commonOpeningContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px 25px;
+    border-radius: 10px;
+    margin-top: 25px;
+    border: 2px solid gray;
+}
+
+.commonOpeningContainerWhite {
+    background-color: white;
+    color: black;
+}
+
+.commonOpeningList {
+    margin: 10px 25px;
+}
+
+.commonOpeningList p:first-child {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.scoutingTitle {
+    font-size: 3em;
+    text-align: center;
+}

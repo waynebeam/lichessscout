@@ -106,31 +106,38 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
 
     return (
         <div>
-            <div>
-                <h1>{title ? title + " " : ''}{username} Scouting Report</h1>
-                <h1>{games.length} rated games scouted</h1>
+            <div className={styles.scoutingReportContainer}>
+                <h1 className={styles.scoutingTitle}>{title ? title + " " : ''}{username} Scouting Report ({games.length} rated games)</h1>
+                <div className={styles.commonOpeningContainer + ' ' + styles.commonOpeningContainerWhite}>
+                    <h1>Common White Openings:</h1>
+                    <div className={styles.commonOpeningList}>
+                        {
+                            whiteOpenings.map(opening => {
+                                return <p key={opening.name}>{opening.name}: {opening.count}</p>
+                            })
+                        }
+                    </div>
+                </div>
+                <div className={styles.commonOpeningContainer}>
+                    <h1>Common Black Openings:</h1>
+                    <div className={styles.commonOpeningList}>
+
+                        {
+                            blackOpenings.map(opening => {
+                                return <p key={opening.name}>{opening.name}: {opening.count}</p>
+                            })
+                        }
+                    </div>
+                </div>
                 <h1>{whiteWins + blackWins} wins</h1>
                 <h1>{totalGames - (whiteWins + blackWins + draws)} Losses</h1>
                 <h1>{draws} Draws</h1>
-                <h1>Common White Openings:</h1>
-                {
-                    whiteOpenings.map(opening => {
-                        return <p key={opening.name}>{opening.name}: {opening.count}</p>
-                    })
-                }
-                <h1>Common Black Openings:</h1>
-                {
-                    blackOpenings.map(opening => {
-                        return <p key={opening.name}>{opening.name}: {opening.count}</p>
-                    })
-                }
-
             </div>
             <br />
             {/* TODO: make the gamesContainer style. It should be a flex box likely. At least 2 colums.  */}
             <div className={styles.gamesContainer}>
                 {
-                    games.map(game => <GameView game={game} key={game.id} />)
+                    games.map(game => <GameView username={username} game={game} key={game.id} />)
                 }
             </div>
         </div>
