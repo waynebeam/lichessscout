@@ -15,3 +15,12 @@
 .gameInfo {
     font-size: 1.5em;
 }
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.link:visited {
+    color: inherit;
+}
