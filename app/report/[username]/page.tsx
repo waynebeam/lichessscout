@@ -1,5 +1,6 @@
 import Link from "next/link";
 import GamesList from "./GamesList";
+import styles from "./gameView.module.css";
 
 
 async function LoadGames(username: string) {
@@ -31,7 +32,7 @@ export default async function Page({ params }: { params: { username: string } })
     let gameStrings = await LoadGames(params.username);
 
     return (
-        <div>
+        <div className={styles.mainContainer}>
             {
                 gameStrings.length ?
                     <GamesList gameStrings={gameStrings} username={params.username} />

@@ -136,7 +136,6 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
                 <h1>{draws} Draws</h1>
             </div>
             <br />
-            {/* TODO: make the gamesContainer style. It should be a flex box likely. At least 2 colums.  */}
             <div className={styles.gamesContainer}>
                 {
                     games.map(game => <GameView username={username} game={game} key={game.id} />)

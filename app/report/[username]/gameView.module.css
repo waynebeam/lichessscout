@@ -1,8 +1,12 @@
+.mainContainer {
+    margin-left: auto;
+
+}
+
 .game {
     border: 3px solid white;
     border-radius: 10px;
     text-align: center;
-    width: 600px;
     padding: 10px;
 }
 
@@ -34,15 +38,16 @@
 }
 
 .gamesContainer {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
 }
+
 
 .scoutingReportContainer {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin-top: 25px;
 }
@@ -73,4 +78,11 @@
 .scoutingTitle {
     font-size: 3em;
     text-align: center;
+}
+
+@media (min-width: 1000px) {
+    .gamesContainer {
+        grid-template-columns: 1fr 1fr;
+
+    }
 }
