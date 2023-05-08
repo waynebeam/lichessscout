@@ -14,10 +14,10 @@ export default function GameView({ game }: GameViewParams) {
     const blackTitle = game.players.black.user.title ? game.players.black.user.title + ' ' : '';
     return (
         <div className={styles.game} onClick={() => setPgnVisible(!pgnVisible)}>
-            <p>{whiteTitle}{game.players.white.user.name} ({game.players.white.rating})
+            <p className={styles.gameInfo}>{whiteTitle}{game.players.white.user.name} ({game.players.white.rating})
                 vs. {blackTitle}{game.players.black.user.name} ({game.players.black.rating})
                 {!game.winner ? " 1/2-1/2" : game.winner === "white" ? " 1-0" : " 0-1"}</p>
-            <p>{game.opening ? game.opening.name : game.id}</p>
+            <p className={styles.openingInfo}>{game.opening ? game.opening.name : game.id}</p>
             <div className={styles.pgnToggle}>
                 {pgnVisible ? <p>PGN <br />  {game.pgn}</p> : <p>View PGN</p>}
             </div>
