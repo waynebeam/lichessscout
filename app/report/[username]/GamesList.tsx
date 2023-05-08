@@ -1,6 +1,7 @@
 'use client';
 
 import GameView from "./GameView"
+import styles from './gameView.module.css'
 
 interface GamesListParams {
     gameStrings: string[]
@@ -111,13 +112,13 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
                 <h1>{whiteWins + blackWins} wins</h1>
                 <h1>{totalGames - (whiteWins + blackWins + draws)} Losses</h1>
                 <h1>{draws} Draws</h1>
-                <h1>Top White Openings:</h1>
+                <h1>Common White Openings:</h1>
                 {
                     whiteOpenings.map(opening => {
                         return <p key={opening.name}>{opening.name}: {opening.count}</p>
                     })
                 }
-                <h1>Top Black Openings:</h1>
+                <h1>Common Black Openings:</h1>
                 {
                     blackOpenings.map(opening => {
                         return <p key={opening.name}>{opening.name}: {opening.count}</p>
@@ -126,9 +127,12 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
 
             </div>
             <br />
-            {
-                games.map(game => <GameView game={game} key={game.id} />)
-            }
+            {/* TODO: make the gamesContainer style. It should be a flex box likely. At least 2 colums.  */}
+            <div className={styles.gamesContainer}>
+                {
+                    games.map(game => <GameView game={game} key={game.id} />)
+                }
+            </div>
         </div>
     )
 
