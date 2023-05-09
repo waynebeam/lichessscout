@@ -9,13 +9,17 @@ async function LoadGames(username: string) {
         max: 60,
         rated: true,
         pgnInJson: true,
-        perfType: 'blitz,rapid,classical',
+        perfType: 'rapid,classical,blitz',
         opening: true,
     }
     const url = baseUrl + new URLSearchParams(params);
     const response = await fetch(url, {
         method: 'GET',
-        headers: { Accept: 'application/x-ndjson' }
+        headers: { Accept: 'application/x-ndjson' },
+        next:
+        {
+            revalidate: 60
+        }
     });
     if (!response.ok) {
         return [];
