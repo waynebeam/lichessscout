@@ -8,10 +8,12 @@
     border-radius: 10px;
     text-align: center;
     padding: 10px;
+    background-image: linear-gradient(to bottom, black, 90%, rgb(50,50,50));
+
 }
 
-.gameBlack {
-    background-color: white;
+.gameWhite {
+    background-image: linear-gradient(to bottom, white, lightgray);
     color: black;
     border-color: darkgray;
 }
@@ -59,11 +61,15 @@
     border-radius: 10px;
     margin-top: 25px;
     border: 2px solid gray;
+    background-image: linear-gradient(to bottom, black, 90%, rgb(50,50,50));
+    
 }
 
 .commonOpeningContainerWhite {
     background-color: white;
     color: black;
+    background-image: linear-gradient(to bottom, white, 80%, gray);
+
 }
 
 .commonOpeningList {

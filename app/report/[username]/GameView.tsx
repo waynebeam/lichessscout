@@ -18,7 +18,7 @@ export default function GameView({ game, username }: GameViewParams) {
     const whitePlayer = game.players.white.user.name;
     const blackPlayer = game.players.black.user.name;
     const playedWhite = whitePlayer.toLowerCase() === username.toLowerCase();
-    const style = [styles.game, playedWhite ? styles.gameBlack : null].join(' ');
+    const style = [styles.game, playedWhite ? styles.gameWhite : null].join(' ');
 
     return (
         <div className={style}>
