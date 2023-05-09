@@ -111,7 +111,7 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
             <div className={styles.scoutingReportContainer}>
                 <h1 className={styles.scoutingTitle}><a target="_blank" href={`https://lichess.org/@/${username}`}>{title ? title + " " : ''}{username}</a> Scouting Report ({games.length} rated games)</h1>
                 <div className={styles.commonOpeningContainer + ' ' + styles.commonOpeningContainerWhite}>
-                    <h1>Common White Openings:</h1>
+                    <h1>Most Common White Openings:</h1>
                     <div className={styles.commonOpeningList}>
                         {
                             whiteOpenings.map(opening => {
@@ -121,7 +121,7 @@ export default function GamesList({ gameStrings, username }: GamesListParams) {
                     </div>
                 </div>
                 <div className={styles.commonOpeningContainer}>
-                    <h1>Common Black Openings:</h1>
+                    <h1>Most Common Black Openings:</h1>
                     <div className={styles.commonOpeningList}>
 
                         {

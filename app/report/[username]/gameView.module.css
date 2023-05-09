@@ -39,6 +39,10 @@
     color: inherit;
 }
 
+.link:hover {
+    color: darkgoldenrod;
+}
+
 .gamesContainer {
     display: grid;
     gap: 1rem;
@@ -60,6 +64,7 @@
     padding: 10px 25px;
     border-radius: 10px;
     margin-top: 25px;
+    margin-bottom: 25px;
     border: 2px solid gray;
     background-image: linear-gradient(to bottom, black, 90%, rgb(50,50,50));
     
