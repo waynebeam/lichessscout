@@ -1,4 +1,6 @@
 import './globals.css'
+import Header from './header'
+import Footer from './Footer'
 
 export const metadata = {
   title: 'Lichess Scout by waynebeam.net',
@@ -12,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

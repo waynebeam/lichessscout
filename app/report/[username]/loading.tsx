@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
+import styles from './loading.module.css';
 
 
 export default function Loading() {
@@ -14,5 +15,5 @@ export default function Loading() {
         return () => clearTimeout(timeout);
     })
 
-    return <div><h1>...{loadingPhrases[index]}...</h1></div>
+    return <div className={styles.loading}><h1>...{loadingPhrases[index]}...</h1></div>
 }

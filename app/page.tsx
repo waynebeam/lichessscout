@@ -17,7 +17,7 @@ export default function Page() {
   }
 
   return <main className={styles.main}>
-    <h1 className={styles.heading}>Lichess Scout by <a rel="noopener" href="https://waynebeam.net" target="_blank">waynebeam.net</a></h1>
+    <h1 className={styles.heading}>Scout Lichess User</h1>
 
     <form onSubmit={scoutUser}>
       <label htmlFor="username">Enter Lichess Username: </label>
