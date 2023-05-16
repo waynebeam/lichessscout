@@ -41,7 +41,7 @@ export default async function Page({ params }: { params: { username: string } })
                 gameStrings.length ?
                     <GamesList gameStrings={gameStrings} username={params.username} />
                     :
-                    <Link href={'/'}><h2 style={{"height": "50vh", "marginTop": "10vh"}}>No games found for "{params.username}"! Click here to try a new search</h2></Link>
+                    <Link href={'/'}><h2 style={{"height": "50vh", "marginTop": "10vh"}}>No games found for {params.username}! Click here to try a new search</h2></Link>
             }
         </div>
     )
